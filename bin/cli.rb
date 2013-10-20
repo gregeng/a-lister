@@ -2,13 +2,14 @@ require_relative '../config/environment'
 require_relative '../lib/models/timer'
 
 class CLI
-  attr_accessor :game, :api, :actor, :movie, :timer
+  attr_accessor :game, :api, :actor, :movie, :timer, :mode
   TIMER = 30
 
   def initialize 
     @on = true
     @game = Game.new
     @api = API.new
+    @mode = "test"
     start_game
   end
 
@@ -20,22 +21,38 @@ class CLI
   end
 
   def start_game
-    typewriter_string ("Welcome to A-lister!\n")
-    typewriter_string ("Please start by naming your favorite actor or actress!\n")
-    get_movie
-    typewriter_string ("Great choice!\n")
-    sleep 0.5
-    typewriter_string ("#{self.actor} was in #{self.movie.upcase}.\n")
-    typewriter_string ("Name another actor from #{self.movie.upcase}.\n")
-    sleep 0.5
-    typewriter_string ("You have #{TIMER} seconds.\n")
-    sleep 1.5
-    typewriter_string ("Ready...")
-    sleep 1
-    typewriter_string ("Set...")
-    sleep 1
-    typewriter_string ("Go!\n")
-    ask_question
+    if self.mode == "production"
+      typewriter_string ("Welcome to A-lister!\n")
+      typewriter_string ("Please start by naming your favorite actor or actress!\n")
+      get_movie
+      typewriter_string ("Great choice!\n")
+      sleep 0.5
+      typewriter_string ("#{self.actor} was in #{self.movie.upcase}.\n")
+      typewriter_string ("Name another actor from #{self.movie.upcase}.\n")
+      sleep 0.5
+      typewriter_string ("You have #{TIMER} seconds.\n")
+      sleep 1.5
+      typewriter_string ("Ready...")
+      sleep 1
+      typewriter_string ("Set...")
+      sleep 1
+      typewriter_string ("Go!\n")
+      start_timer
+      ask_question
+    else
+      puts ("Welcome to A-lister!")
+      puts ("Please start by naming your favorite actor or actress!")
+      get_movie
+      puts ("Great choice!")
+      puts ("#{self.actor} was in #{self.movie.upcase}.")
+      puts ("Name another actor from #{self.movie.upcase}.")
+      puts ("You have #{TIMER} seconds.")
+      puts ("Ready...")
+      puts ("Set...")
+      puts ("Go!")
+      start_timer
+      ask_question
+    end
   end
 
   def start_timer
@@ -48,11 +65,9 @@ class CLI
   end
 
   def ask_question
-      start_timer
-      puts "Name another actor in #{self.movie}"
-      self.actor = get_input
-      check_answer(self.actor)
-
+    puts "Name another actor in #{self.movie}"
+    self.actor = get_input
+    check_answer(self.actor)
   end
 
   def check_answer(actor)
@@ -66,16 +81,15 @@ class CLI
 
     puts "CORRECT!"
     print_time_remaining
-    
-    binding.pry
+  
     next_movie
-
   end
 
-  def next_movie  
+  def next_movie
     self.movie = self.api.give_first_movie(self.actor)
 
-    check_timer 
+    start_timer
+    ask_question 
   end
 
   def add_correct_answer_object
