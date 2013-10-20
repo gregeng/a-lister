@@ -69,4 +69,4 @@ end
 
 api = API.new
 
-# binding.pry
+binding.pry
