@@ -15,12 +15,12 @@ FREEBASE_URL = Addressable::URI.parse('https://www.googleapis.com/freebase/v1/mq
 
   def give_first_movie(actor="Brad Pitt")
     movie_count = show_movies(actor).size
-    show_movies(actor)[rand(1)]
+    show_movies(actor)[rand(4)]
   end
 
   def give_first_actor(movie="Ocean's Eleven")
     actor_count = show_actors(movie).size
-    show_actors(movie)[rand(1)]
+    show_actors(movie)[rand(4)]
   end
 
   def freebase_magic(query)

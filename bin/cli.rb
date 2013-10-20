@@ -3,6 +3,7 @@ require_relative '../lib/models/timer'
 
 class CLI
   attr_accessor :game, :api, :actor, :movie, :timer
+  TIMER = 30
 
   def initialize 
     @on = true
@@ -11,44 +12,77 @@ class CLI
     start_game
   end
 
+  def typewriter_string(string)
+    string.chars.each do |x|
+      print x
+      sleep 0.035
+    end
+  end
+
   def start_game
-    puts "Hello, and welcome to A-lister!"
-    puts "Your job is to name as many actors as possible from the same movie."
-    puts "Please start by naming your favorite actor or actress!"
-    self.actor = gets.capitalize.strip
-    self.game.movie = self.api.give_first_movie(self.actor)
-    puts "Great choice! #{self.actor} was in #{self.game.movie.upcase}."
-    puts "How many more actors can you name from that movie?"
-    puts "You have 30 seconds"
-    puts "Ready...set....go!"
-    start_timer
+    typewriter_string ("Welcome to A-lister!\n")
+    typewriter_string ("Please start by naming your favorite actor or actress!\n")
+    get_movie
+    typewriter_string ("Great choice!\n")
+    sleep 0.5
+    typewriter_string ("#{self.actor} was in #{self.movie.upcase}.\n")
+    typewriter_string ("Name another actor from #{self.movie.upcase}.\n")
+    sleep 0.5
+    typewriter_string ("You have #{TIMER} seconds.\n")
+    sleep 1.5
+    typewriter_string ("Ready...")
+    sleep 1
+    typewriter_string ("Set...")
+    sleep 1
+    typewriter_string ("Go!\n")
     ask_question
   end
 
   def start_timer
-    self.timer = Timer.new(30)
+    self.timer = Timer.new(TIMER)
+  end
+
+  def get_movie
+    self.actor = get_input
+    self.movie = self.api.give_first_movie(self.actor)
   end
 
   def ask_question
-      puts "Name another actor in #{self.game.movie}"
-      guess = gets.capitalize.strip
-      check_answer(guess)
+      start_timer
+      puts "Name another actor in #{self.movie}"
+      self.actor = get_input
+      check_answer(self.actor)
+
   end
 
   def check_answer(actor)
-    right_answer if self.api.check_actor_answer(actor,self.game.movie)
-    wrong_answer if !self.api.check_actor_answer(actor,self.game.movie)
+    correct if self.api.check_actor_answer(actor,self.movie)
+    wrong if !self.api.check_actor_answer(actor,self.movie)
   end
 
-  def right_answer
+  def correct
     self.game.increase_score
-    puts "Correct!"
+    add_correct_answer_object
+
+    puts "CORRECT!"
     print_time_remaining
     
-    check_timer   
+    binding.pry
+    next_movie
+
   end
 
-  def wrong_answer
+  def next_movie  
+    self.movie = self.api.give_first_movie(self.actor)
+
+    check_timer 
+  end
+
+  def add_correct_answer_object
+    CorrectAnswer.new.tap {|x| x.name = self.actor ; x.movie = self.movie } # x.netflix_id = 26004747
+  end
+
+  def wrong
     puts "WRONG" 
     print_time_remaining
     puts "Guess again!"
@@ -61,7 +95,7 @@ class CLI
   end
 
   def print_time_remaining
-    puts "There are #{self.timer.time_remaining} seconds remaining!"
+    puts "There are #{self.timer.time_remaining.round(1)} seconds remaining!"
   end
 
   def check_timer
