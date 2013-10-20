@@ -93,7 +93,9 @@ class CLI
   end
 
   def add_correct_answer_object
-    CorrectAnswer.new.tap {|x| x.name = self.actor ; x.movie = self.movie } # x.netflix_id = 26004747
+    netflix_id = self.api.get_netflix_id(self.movie)
+    CorrectAnswer.new.tap {|x| x.name = self.actor ; x.movie = self.movie ; x.netflix_id = netflix_id }
+    binding.pry
   end
 
   def wrong
