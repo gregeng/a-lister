@@ -3,13 +3,13 @@ require_relative '../lib/models/timer'
 
 class CLI
   attr_accessor :game, :api, :actor, :movie, :timer, :mode
-  TIMER = 5
+  TIMER = 10
 
-  def initialize 
+  def initialize
     @on = true
     @game = Game.new
     @api = API.new
-    @mode = "test"
+    @mode = "production"
     start_game
   end
 
@@ -81,7 +81,7 @@ class CLI
     self.movie = self.api.get_movie(self.actor)
 
     start_timer
-    ask_question 
+    ask_question
   end
 
   def correct
@@ -93,7 +93,7 @@ class CLI
 
     if time_left?
       next_movie
-    else    
+    else
       end_game
     end
   end
@@ -104,8 +104,8 @@ class CLI
 
   def wrong
     line
-    puts "WRONG" 
-    
+    puts "WRONG"
+
     if time_left?
       puts "Guess again!"
       ask_question
