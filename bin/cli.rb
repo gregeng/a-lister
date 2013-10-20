@@ -31,12 +31,12 @@ class CLI
       typewriter_string ("Name another actor from #{self.movie.upcase}.\n")
       sleep 0.5
       typewriter_string ("You have #{TIMER} seconds.\n")
-      sleep 1.5
-      typewriter_string ("Ready...")
+      sleep 0.5
+      puts "Ready..."
       sleep 1
-      typewriter_string ("Set...")
+      puts "Set..."
       sleep 1
-      typewriter_string ("Go!\n")
+      puts "Go!\n"
       start_timer
       ask_question
     else
@@ -135,6 +135,8 @@ class CLI
 
   def end_game
     puts "Time's up!\n You got #{self.game.score} answers right"
+    puts "Generating results...\n"
+    sleep 2
     SiteGenerator.generate
   end
 
