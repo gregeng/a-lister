@@ -1,10 +1,16 @@
 require_relative '../../config/environment'
 
+class APICall
+  ### make a stub for this test
+  # APICall.stub(:do_magic).and_return(json_string)
+end
+
 class API
 
 API_KEY = open('config/.freebase_api_key').read()
 FREEBASE_URL = Addressable::URI.parse('https://www.googleapis.com/freebase/v1/mqlread')
 
+## split the classes into get / read data classes
 ## Need to find a way to handle when the query returns nil due to a typo
 
   def give_first_movie(actor="Brad Pitt")
@@ -69,4 +75,4 @@ end
 
 api = API.new
 
-binding.pry
+# binding.pry
