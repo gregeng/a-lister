@@ -43,4 +43,27 @@ CLI
 HTML ERB
 No Need for a Database
 
+For presentaton:
+  Lessons Learned
+  Goals
+  Things we could make better in teh future
+  Predictive Search
+  Game Difficulty with random generator
+  More Testing
+
+  it should make sure all the gems and dependencies are installed
+
+  simple cov
+
+  get it to work then write tests then refector around tests
+
+  use emojis in the command line to keep track of all the correct answers
+
+  how to prevent repeats which would just allow a user to go through the movies and answers over and over again to just rack up points
+
+  type something like "the show's over" to end the program
+
+
+
+
 
