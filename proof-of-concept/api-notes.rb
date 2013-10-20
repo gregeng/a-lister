@@ -11,7 +11,7 @@ query = [
     { "starring" => [
       {"actor" => [] }
       ],
-      "name" => "saving private ryan",
+      "name" => "Fight Club",
       "netflix_id" => [],
       "apple_movietrailer_id" => [],
       "rottentomatoes_id" => [],
@@ -35,7 +35,7 @@ API_KEY = open(".freebase_api_key").read()
 query = [
       {
         "starring" => [
-          { "actor" => "tom" }
+          { "actor" => "brad pitt" }
         ],
         "name" => [],
         "type" => "/film/film"
