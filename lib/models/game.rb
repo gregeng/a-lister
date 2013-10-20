@@ -1,6 +1,6 @@
 class Game
 
-  attr_accessor :question, :score, :current_actor, :current_movie, :type
+  attr_accessor :question, :score, :current_actor, :movie, :type
 
   def initialize
     @score = 0

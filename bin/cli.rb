@@ -1,66 +1,79 @@
 require_relative '../config/environment'
+require_relative '../lib/models/timer'
 
 class CLI
-  attr_accessor :game, :api
+  attr_accessor :game, :api, :actor, :movie, :timer
 
   def initialize 
-    #@on = true
-    self.game = Game.new
-    self.api = API.new
+    @on = true
+    @game = Game.new
+    @api = API.new
     start_game
   end
 
   def start_game
-    puts "Select actor or movie"
-    self.game.type = gets.capitalize.strip
-    self.send("get_#{self.game.type.downcase}")
+    puts "Hello, and welcome to A-lister!"
+    puts "Your job is to name as many actors as possible from the same movie."
+    puts "Please start by naming your favorite actor or actress!"
+    self.actor = gets.capitalize.strip
+    self.game.movie = self.api.give_first_movie(self.actor)
+    puts "Great choice! #{self.actor} was in #{self.game.movie.upcase}."
+    puts "How many more actors can you name from that movie?"
+    puts "You have 30 seconds"
+    puts "Ready...set....go!"
+    start_timer
+    ask_question
   end
 
-  def get_movie
-    #self.api.get_movie_name
-    self.game.current_movie = "Saving Private Ryan"
-  end
-
-  def get_actor
-    #self.api.get_actor_name
-    self.game.current_actor = "Matt Damon"
+  def start_timer
+    self.timer = Timer.new(30)
   end
 
   def ask_question
-    puts "Name another actor in #{self.game.current_movie}" if self.game.type = "movie"
-    check_answer(gets.capitalize.strip)
+      puts "Name another actor in #{self.game.movie}"
+      guess = gets.capitalize.strip
+      check_answer(guess)
   end
 
   def check_answer(actor)
-    right_answer if self.api(actor,self.game.current_movie)
-    wrong_answer if !self.api(actor,self.game.current_movie)
+    right_answer if self.api.check_actor_answer(actor,self.game.movie)
+    wrong_answer if !self.api.check_actor_answer(actor,self.game.movie)
   end
 
   def right_answer
-    puts "Correct! You get 1 point."
-    puts "Enter Q to quit or P to play another turn"
-    get_input
+    self.game.increase_score
+    puts "Correct!"
+    print_time_remaining
+    
+    check_timer   
   end
 
   def wrong_answer
-    puts "Sorry, wrong answer."
-    puts "Enter P to play again or Q to quit"
+    puts "WRONG" 
+    print_time_remaining
+    puts "Guess again!"
+    
+    check_timer
   end
 
   def get_input
     gets.capitalize.strip
   end
 
-  def do_turn
-    #pick Actor or Movie DONE
-    #--picks Actor DONE
-    #returns a random movie with that Actor DONE
-    #puts "Name another actor in that movie" DONE
-    #--answer question DONE
-    #If right: puts "Great job. Play again?" DONE
-    #If wrong: puts "Sorry, wrong answer. Guess again, start over, or quit?" DONE
+  def print_time_remaining
+    puts "There are #{self.timer.time_remaining} seconds remaining!"
   end
 
+  def check_timer
+    if self.timer.time_remaining > 0
+      ask_question
+    else
+      end_game
+    end
+  end
 
+  def end_game
+    puts "Game over. You got #{self.game.score} answers right"
+  end
 
 end
