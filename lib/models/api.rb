@@ -71,8 +71,21 @@ FREEBASE_URL = Addressable::URI.parse('https://www.googleapis.com/freebase/v1/mq
     actors.include?(actor)
   end
 
+  def get_netflix_id(movie="Fight Club")
+        query = [
+          {
+            "name" => movie,
+            "netflix_id" => [],
+            "type" => "/film/film"
+          }
+        ]
+
+      response = freebase_magic(query)
+      netflix_id = response['result'][0]['netflix_id'][-1]
+  end
+
 end
 
 api = API.new
 
-#binding.pry
+# binding.pry
