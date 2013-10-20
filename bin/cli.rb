@@ -3,13 +3,13 @@ require_relative '../lib/models/timer'
 
 class CLI
   attr_accessor :game, :api, :actor, :movie, :timer, :mode
-  TIMER = 5
+  TIMER = 10
 
   def initialize 
     @on = true
     @game = Game.new
     @api = API.new
-    @mode = "test"
+    @mode = "production"
     start_game
   end
 
