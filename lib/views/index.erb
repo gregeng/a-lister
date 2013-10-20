@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+</head>
+  <body>
+  <h1>Thanks for playing A-Lister</h1>
+   <h3>You scored <%= @correct_answers.all.count %> points, great job!</h3>
+
+   <ul>
+    <% @correct_answers.each do |answer| %>
+     <li><%= answer.name %></li>
+     <li><%= answer.movie %></li>
+     <li><a href="#" target="_blank"><%= answer.netflix_id %></li>
+     <% end %>
+   </ul>
+
+  </body>
+</html>
