@@ -3,7 +3,7 @@ require_relative '../lib/models/timer'
 
 class CLI
   attr_accessor :game, :api, :actor, :movie, :timer, :mode
-  TIMER = 10
+  TIMER = 5
 
   def initialize 
     @on = true
@@ -135,6 +135,7 @@ class CLI
 
   def end_game
     puts "Time's up!\n You got #{self.game.score} answers right"
+    SiteGenerator.generate
   end
 
 end

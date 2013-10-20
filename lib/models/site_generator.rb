@@ -10,20 +10,19 @@ class SiteGenerator
     self.new.tap { |sg| sg.generate_index }
   end
 
-  def generate_index # this should be renamed to index
-    template_content = File.read("lib/views/index.erb") # this should be renamed to index
+  def generate_index
+    template_content = File.read("lib/views/index.erb")
     index = ERB.new(template_content)
     @correct_answers = CorrectAnswer.all
-
-    # binding.pry
 
     File.open('_site/index.html', 'w+') do |f|
     f << index.result(binding)
     end
+    open_html_page("_site/index.html")
+  end
+
+  def open_html_page(link)
+    `open #{link}`
   end
 
 end
-
-# binding.pry
-
-SiteGenerator.generate
