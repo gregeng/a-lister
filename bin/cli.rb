@@ -3,7 +3,7 @@ require_relative '../lib/models/timer'
 
 class CLI
   attr_accessor :game, :api, :actor, :movie, :timer, :mode
-  TIMER = 30
+  TIMER = 10
 
   def initialize 
     @on = true
@@ -65,6 +65,7 @@ class CLI
   end
 
   def ask_question
+    puts print_time_remaining
     puts "Name another actor in #{self.movie}"
     self.actor = get_input
     check_answer(self.actor)
@@ -75,16 +76,6 @@ class CLI
     wrong if !self.api.check_actor_answer(actor,self.movie)
   end
 
-  def correct
-    self.game.increase_score
-    add_correct_answer_object
-
-    puts "CORRECT!"
-    print_time_remaining
-  
-    next_movie
-  end
-
   def next_movie
     self.movie = self.api.get_movie(self.actor)
 
@@ -92,18 +83,32 @@ class CLI
     ask_question 
   end
 
-  def add_correct_answer_object
-    netflix_id = self.api.get_netflix_id(self.movie)
-    CorrectAnswer.new.tap {|x| x.name = self.actor ; x.movie = self.movie ; x.netflix_id = netflix_id }
-    binding.pry
+  def correct
+    puts "CORRECT!"
+    self.game.increase_score
+    add_correct_answer_object
+
+    if time_left?
+      next_movie
+    else    
+      end_game
+    end
   end
 
   def wrong
     puts "WRONG" 
-    print_time_remaining
-    puts "Guess again!"
     
-    check_timer
+    if time_left?
+      puts "Guess again!"
+      ask_question
+    else
+      end_game
+    end
+  end
+
+  def add_correct_answer_object
+    netflix_id = self.api.get_netflix_id(self.movie)
+    CorrectAnswer.new.tap {|x| x.name = self.actor ; x.movie = self.movie ; x.netflix_id = netflix_id }
   end
 
   def get_input
@@ -114,16 +119,12 @@ class CLI
     puts "There are #{self.timer.time_remaining.round(1)} seconds remaining!"
   end
 
-  def check_timer
-    if self.timer.time_remaining > 0
-      ask_question
-    else
-      end_game
-    end
+  def time_left?
+    self.timer.time_remaining > 0
   end
 
   def end_game
-    puts "Game over. You got #{self.game.score} answers right"
+    puts "Time's up!\n You got #{self.game.score} answers right"
   end
 
 end
