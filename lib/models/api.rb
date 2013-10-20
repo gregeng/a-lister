@@ -13,12 +13,12 @@ FREEBASE_URL = Addressable::URI.parse('https://www.googleapis.com/freebase/v1/mq
 ## split the classes into get / read data classes
 ## Need to find a way to handle when the query returns nil due to a typo
 
-  def give_first_movie(actor="Brad Pitt")
+  def get_movie(actor="Brad Pitt")
     movie_count = show_movies(actor).size
     show_movies(actor)[rand(4)]
   end
 
-  def give_first_actor(movie="Ocean's Eleven")
+  def get_actor(movie="Ocean's Eleven")
     actor_count = show_actors(movie).size
     show_actors(movie)[rand(4)]
   end

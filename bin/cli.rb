@@ -24,7 +24,7 @@ class CLI
     if self.mode == "production"
       typewriter_string ("Welcome to A-lister!\n")
       typewriter_string ("Please start by naming your favorite actor or actress!\n")
-      get_movie
+      assign_movie
       typewriter_string ("Great choice!\n")
       sleep 0.5
       typewriter_string ("#{self.actor} was in #{self.movie.upcase}.\n")
@@ -42,7 +42,7 @@ class CLI
     else
       puts ("Welcome to A-lister!")
       puts ("Please start by naming your favorite actor or actress!")
-      get_movie
+      assign_movie
       puts ("Great choice!")
       puts ("#{self.actor} was in #{self.movie.upcase}.")
       puts ("Name another actor from #{self.movie.upcase}.")
@@ -59,9 +59,9 @@ class CLI
     self.timer = Timer.new(TIMER)
   end
 
-  def get_movie
+  def assign_movie
     self.actor = get_input
-    self.movie = self.api.give_first_movie(self.actor)
+    self.movie = self.api.get_movie(self.actor)
   end
 
   def ask_question
@@ -86,7 +86,7 @@ class CLI
   end
 
   def next_movie
-    self.movie = self.api.give_first_movie(self.actor)
+    self.movie = self.api.get_movie(self.actor)
 
     start_timer
     ask_question 
