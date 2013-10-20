@@ -73,6 +73,6 @@ FREEBASE_URL = Addressable::URI.parse('https://www.googleapis.com/freebase/v1/mq
 
 end
 
-api = API.new
+  # api = API.new
 
-binding.pry
+  # binding.pry
