@@ -7,13 +7,15 @@ class SiteGenerator
   end
 
   def self.generate
-    generate_index
+    self.new.tap { |sg| sg.generate_index }
   end
 
   def generate_index # this should be renamed to index
     template_content = File.read("lib/views/index.erb") # this should be renamed to index
     index = ERB.new(template_content)
     @correct_answers = CorrectAnswer.all
+
+    # binding.pry
 
     File.open('_site/index.html', 'w+') do |f|
     f << index.result(binding)
@@ -22,6 +24,6 @@ class SiteGenerator
 
 end
 
-binding.pry
+# binding.pry
 
 SiteGenerator.generate
