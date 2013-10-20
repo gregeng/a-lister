@@ -65,8 +65,9 @@ class CLI
   end
 
   def ask_question
-    puts print_time_remaining
+    line
     puts "Name another actor in #{self.movie}"
+    print_time_remaining
     self.actor = get_input
     check_answer(self.actor)
   end
@@ -84,7 +85,9 @@ class CLI
   end
 
   def correct
+    line
     puts "CORRECT!"
+    line
     self.game.increase_score
     add_correct_answer_object
 
@@ -95,7 +98,12 @@ class CLI
     end
   end
 
+  def line
+    puts "---------------------------"
+  end
+
   def wrong
+    line
     puts "WRONG" 
     
     if time_left?
@@ -116,7 +124,9 @@ class CLI
   end
 
   def print_time_remaining
-    puts "There are #{self.timer.time_remaining.round(1)} seconds remaining!"
+    line
+    puts "#{self.timer.time_remaining.round(1)} seconds left!"
+    line
   end
 
   def time_left?
