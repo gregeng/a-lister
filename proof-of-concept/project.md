@@ -63,6 +63,14 @@ For presentaton:
 
   type something like "the show's over" to end the program
 
+  ### sounds
+
+  background music
+  correct answer
+  wrong answer
+
+
+
 
 
 
