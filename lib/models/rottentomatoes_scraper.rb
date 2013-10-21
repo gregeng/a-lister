@@ -1,27 +1,30 @@
 require 'nokogiri'
 require 'open-uri'
-
 class RottenTomatoesScraper
+
+  TOMATOES = "http://www.rottentomatoes.com/celebrity/"
+
   attr_accessor :scraped_data
 
-  def initialize(url)
-    @scraped_data = Nokogiri::HTML(open(url))
+  def initialize(actor)
+    @scraped_data = Nokogiri::HTML(open(make_url(actor)))
   end
 
   def get_image
     @scraped_data.css("div.media_block_image.big a img").attr("src")
   end
 
-  # def make_url(actor)
-  #   ## take the argument actor... parse it ... and then ammend to the rotten tomatoes url
-  #   # http://www.rottentomatoes.com/celebrity/#{ACTOR}
-  #   # http://www.rottentomatoes.com/celebrity/matt damon
-  # end
+  def urlize_actor(actor)
+    actor = actor.downcase.strip.gsub(" ","_")
+  end
 
-  # actor name , matt damon = matt_damon
+  def make_url(actor)
+    TOMATOES + urlize_actor(actor)
+  end
 
 end
 
 
-r = RottenTomatoesScraper.new("http://www.rottentomatoes.com/celebrity/matt_damon/")
+
+r = RottenTomatoesScraper.new("tom hanks")
 puts r.get_image
