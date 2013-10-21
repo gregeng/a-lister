@@ -138,6 +138,7 @@ class CLI
     puts "Generating results...\n"
     sleep 2
     SiteGenerator.generate
+    exit
   end
 
 end
