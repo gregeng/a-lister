@@ -31,8 +31,8 @@ describe CorrectAnswer do
   it "can assign a netflix id to an instance" do
     CorrectAnswer.reset_all
     c = CorrectAnswer.new
-    c.netflix_id = 26004747
-    c.netflix_id.should eq(26004747)
+    c.netflix_id = "26004747"
+    c.netflix_id.should eq("26004747")
   end
 
 end

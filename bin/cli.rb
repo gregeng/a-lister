@@ -3,7 +3,7 @@ require_relative '../lib/models/timer'
 
 class CLI
   attr_accessor :game, :api, :actor, :movie, :timer, :mode
-  TIMER = 10
+  TIMER = 15
 
   def initialize
     @on = true
@@ -22,13 +22,13 @@ class CLI
 
   def start_game
     if self.mode == "production"
-      typewriter_string ("Welcome to A-lister!\n")
+      typewriter_string ("Welcome to A-Lister!\n")
       typewriter_string ("Please start by naming your favorite actor or actress!\n")
       assign_movie
       typewriter_string ("Great choice!\n")
       sleep 0.5
-      typewriter_string ("#{self.actor} was in #{self.movie.upcase}.\n")
-      typewriter_string ("Name another actor from #{self.movie.upcase}.\n")
+      typewriter_string ("#{self.actor} was in :: #{self.movie} ::\n")
+      typewriter_string ("Name another actor from :: #{self.movie} ::\n")
       sleep 0.5
       typewriter_string ("You have #{TIMER} seconds.\n")
       sleep 0.5
@@ -66,7 +66,7 @@ class CLI
 
   def ask_question
     line
-    puts "Name another actor in #{self.movie}"
+    puts "Name another actor in :: #{self.movie} ::"
     print_time_remaining
     self.actor = get_input
     check_answer(self.actor)
@@ -120,7 +120,7 @@ class CLI
   end
 
   def get_input
-    gets.capitalize.strip
+    gets.strip.split.map(&:capitalize).join(' ')
   end
 
   def print_time_remaining
