@@ -1,5 +1,3 @@
-require 'nokogiri'
-require 'open-uri'
 class RottenTomatoesScraper
 
   TOMATOES = "http://www.rottentomatoes.com/celebrity/"
@@ -11,7 +9,7 @@ class RottenTomatoesScraper
   end
 
   def get_image
-    @scraped_data.css("div.media_block_image.big a img").attr("src")
+    @scraped_data.css("div.media_block_image.big a img").attr("src").value
   end
 
   def urlize_actor(actor)
@@ -23,8 +21,3 @@ class RottenTomatoesScraper
   end
 
 end
-
-
-
-r = RottenTomatoesScraper.new("tom hanks")
-puts r.get_image

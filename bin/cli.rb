@@ -9,7 +9,7 @@ class CLI
     @on = true
     @game = Game.new
     @api = API.new
-    @mode = "production"
+    @mode = "test"
     start_game
   end
 
@@ -115,8 +115,22 @@ class CLI
   end
 
   def add_correct_answer_object
-    netflix_id = self.api.get_netflix_id(self.movie)
-    CorrectAnswer.new.tap {|x| x.name = self.actor ; x.movie = self.movie ; x.netflix_id = netflix_id }
+    # netflix_id = self.api.get_netflix_id(self.movie)
+    # actor_picture = RottenTomatoesScraper.new(self.actor).get_image
+    # netflix_url = "http://movies.netflix.com/Movie/"+self.api.get_netflix_id(self.movie)
+    # box_cover = NetflixScraper.new(netflix_url).get_image
+
+    # binding.pry
+
+    CorrectAnswer.new.tap do |x|
+      x.name = self.actor;
+      x.movie = self.movie;
+      # x.netflix_id = netflix_id;
+      # x.headshot = actor_picture;
+      # x.movie_photo = box_cover
+    end
+
+
   end
 
   def get_input
