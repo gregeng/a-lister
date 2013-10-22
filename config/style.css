@@ -1,0 +1,107 @@
+body {
+  font-family: Monaco, Consolas, "Lucida Console", monospace;
+  background-color: #c24742;
+ /* background-image: url(http://static.guim.co.uk/sys-images/Film/Pix/pictures/2008/11/21/hollwyd460.jpg);
+  background-repeat: none;*/
+}
+
+/*.blue_part {
+  background-color: #0c9ee9;
+  padding: 12px 12px 12px 12px;
+  margin: -10px -10px 10px -10px;
+}*/
+
+.top_part {
+  background-color: black;
+  padding: 10px 10px 10px 25px;
+  margin: -10px -10px 10px -10px;
+}
+
+.header_box {
+  text-align: center;
+  background-color: #232323;
+  padding: 2px 5px 5px 2px;
+  margin: 100px 120px 0px 120px;
+  border-radius: 10px 10px 0px 0px;
+}
+
+h1 {
+  color: #ebece9;
+  font-size: 40px;
+}
+
+h2 {
+  color: #ebece9;
+  font-size: 18px;
+}
+
+h3 {
+  color: #0c9ee9;
+  font-size: 20px;
+  margin-top: -10px;
+}
+
+h4 {
+  color: #0c9ee9;
+  font-size: 18px;
+  margin-top: 5px;
+}
+
+p {
+  color: #f7f373;
+  font-size: 25px;
+}
+
+.list_background {
+  background-color: #3d3e3d;
+  margin: 0px 120px 100px 120px;
+  padding: 10px 10px 60px 2px;
+  border-radius: 0px 0px 10px 10px;
+}
+
+.list_item {
+  background-color: #292929;
+  border-radius: 10px;
+  margin: 35px 55px -10px 55px;
+  padding: 20px 45px 0px 45px;
+}
+
+.actor {
+  border-radius: 250px;
+  box-shadow: 0px 0px 25px 2px white;
+}
+
+.netflix {
+  box-shadow: 0px 0px 25px 2px white;
+}
+
+.left {
+  text-align: center;
+  display: inline-block;
+  margin-bottom: -5px;
+}
+
+.right {
+  text-align: right;
+  float: right;
+}
+
+.you_guessed {
+  clearfix: all;
+  float: left;
+  margin-right: 100px;
+  margin-top: 75px;
+}
+
+/*.in {
+  margin-right: 220px;
+  margin-top: -110px;
+}*/
+
+.bottom_footer {
+  color: #ebece9;
+  text-align: center;
+  background-color: black;
+  padding: 60px 0px 60px 0px;
+  margin: 30px -10px -20px -10px;
+}
