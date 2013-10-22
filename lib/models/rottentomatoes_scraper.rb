@@ -8,7 +8,7 @@ class RottenTomatoesScraper
 
   def initialize(actor)
     begin
-    actor = actor.downcase.strip.gsub!(/[^a-z ]/,"").gsub(" ","_")
+    actor = actor.downcase.strip.gsub(" ","_").gsub(".","")
     url = TOMATOES + actor
     @scraped_data = Nokogiri::HTML(open(url))
     rescue
