@@ -29,7 +29,7 @@
       <div class="list_item">
 
         <div class="left">
-          <a href="http://www.rottentomatoes.com/celebrity/<%= answer.name.downcase.strip.gsub(" ","_") %>" target="_blank"><img src="<%= answer.headshot %>" width="180" height="180" class="actor"></a>
+          <a href="http://www.rottentomatoes.com/celebrity/<%= answer.name.downcase.strip.gsub(/[^a-z ]/,"").gsub(" ","_") %>" target="_blank"><img src="<%= answer.headshot %>" width="180" height="180" class="actor"></a>
           <h4><%= answer.name %></h4>
         </div>
         <div class="right">
