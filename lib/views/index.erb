@@ -4,8 +4,6 @@
   <head>
     <title>A-Lister Score Sheet</title>
     <link rel="stylesheet" href="../config/style.css">
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js">
-    </script>
   </head>
 
   <body>
@@ -29,24 +27,16 @@
       <div class="list_item">
         <div class="left">
           <% @correct_answers.each do |answer| %>
-
           <img src="<%= answer.headshot %>" width="180" height="180" class="actor">
-
           <h4><%= answer.name %></h4>
-
         </div>
-
         <div class="right">
-
-            <img src="<%= answer.movie_photo %>" width="130" height="180" class="netflix">
-
-          <!-- <p class="in">in</p> -->
-
+          <img src="<%= answer.movie_photo %>" width="130" height="180" class="netflix">
           <h4><%= answer.movie %></h4>
-
          <% end %>
         </div>
       </div>
+    </div>
 
     <footer>
       <div class="bottom_footer">
