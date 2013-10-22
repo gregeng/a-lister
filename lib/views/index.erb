@@ -1,20 +1,59 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title></title>
-</head>
+
+  <head>
+    <title>A-Lister Score Sheet</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js">
+    </script>
+  </head>
+
   <body>
-  <h1>Thanks for playing A-Lister</h1>
-   <h3>You scored <%= @correct_answers.count %> points, great job. Try again soon!</h3>
 
+    <header>
+      <div class="top_part">
+        <h2>*** Check out your score sheet below! ***<h2>
+      </div>
+    </header>
 
-    <% @correct_answers.each do |answer| %>
-     <h4><%= answer.name %></h4>
-     <h4><%= answer.movie %></h4>
-     <h4><%= answer.headshot %></h4>
-     <h4><%= answer.movie_photo %></h4>
-     <br>
-     <% end %>
+    <div class="header_box">
+      <h1>Thanks for playing A-Lister!</h1>
+      <h3>You scored </h3>
+      <h1><%= @correct_answers.count %> points.</h1>
+      <h3>Great Job.</h3>
+      <h3>Try again soon!</h3>
+    </div>
+
+    <div class="list_background">
+      <div class="list_item">
+        <div class="left">
+          <% @correct_answers.each do |answer| %>
+
+          <img src="<%= answer.headshot %>" width="180" height="180" class="actor">
+
+          <h4><%= answer.name %></h4>
+
+        </div>
+
+        <div class="right">
+
+            <img src="<%= answer.movie_photo %>" width="130" height="180" class="netflix">
+
+          <!-- <p class="in">in</p> -->
+
+          <h4><%= answer.movie %></h4>
+
+         <% end %>
+        </div>
+        <p class="you_guessed">You guessed...</p>
+      </div>
+
+    <footer>
+      <div class="bottom_footer">
+        &copy; 2013 The Flatiron School. Greg E, Trevor M, Stephanie O. | visit <a href="http://www.flatironschool.com">site</a>
+      </div>
+    </footer>
 
   </body>
+
 </html>

@@ -146,7 +146,6 @@ class CLI
   def end_game
     puts "Time's up!\n You got #{self.game.score} answers right"
     puts "Generating results...\n"
-    binding.pry
     sleep 2
     SiteGenerator.generate
     exit
