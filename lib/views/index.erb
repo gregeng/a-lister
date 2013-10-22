@@ -29,11 +29,11 @@
       <div class="list_item">
 
         <div class="left">
-          <img src="<%= answer.headshot %>" width="180" height="180" class="actor">
+          <a href="http://www.rottentomatoes.com/celebrity/<%= answer.name.downcase.strip.gsub(" ","_") %>" target="_blank"><img src="<%= answer.headshot %>" width="180" height="180" class="actor"></a>
           <h4><%= answer.name %></h4>
         </div>
         <div class="right">
-          <img src="<%= answer.movie_photo %>" width="130" height="180" class="netflix">
+          <a href="http://movies.netflix.com/Movie/<%= answer.netflix_id %>" target="_blank"><img src="<%= answer.movie_photo %>" width="130" height="180" class="netflix"></a>
           <h4><%= answer.movie %></h4>
         </div>
         <p class="you_guessed">You guessed...</p>
