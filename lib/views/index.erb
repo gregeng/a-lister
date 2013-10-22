@@ -19,8 +19,8 @@
       <h3>You scored </h3>
       <h1><%= @correct_answers.count %></h1>
       <h3>points</h3>
-      <h3>Great Job.</h3>
-      <h3>Try again soon!</h3>
+     <!--  <h3>Great Job.</h3>
+      <h3>Try again soon!</h3> -->
     </div>
 
     <div class="list_background">
@@ -33,9 +33,10 @@
         <div class="right">
           <img src="<%= answer.movie_photo %>" width="130" height="180" class="netflix">
           <h4><%= answer.movie %></h4>
-         <% end %>
         </div>
+        <p class="you_guessed">You guessed...</p>
       </div>
+      <% end %>
     </div>
 
     <footer>
