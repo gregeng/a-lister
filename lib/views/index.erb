@@ -3,7 +3,7 @@
 
   <head>
     <title>A-Lister Score Sheet</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../config/style.css">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js">
     </script>
   </head>
@@ -19,7 +19,8 @@
     <div class="header_box">
       <h1>Thanks for playing A-Lister!</h1>
       <h3>You scored </h3>
-      <h1><%= @correct_answers.count %> points.</h1>
+      <h1><%= @correct_answers.count %></h1>
+      <h3>points</h3>
       <h3>Great Job.</h3>
       <h3>Try again soon!</h3>
     </div>
@@ -45,7 +46,6 @@
 
          <% end %>
         </div>
-        <p class="you_guessed">You guessed...</p>
       </div>
 
     <footer>
