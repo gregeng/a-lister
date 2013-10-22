@@ -70,8 +70,41 @@ For presentaton:
   wrong answer
 
 
+stuff to do until presentations
 
+- cli niceities , sound, emojis
+- refactor when the correctanswer objects are created
+- research freebase and the gems we're using
+- clean up project folders
+- sounds error
+- should we move cli to just a game class and then cli just has one method of .call or .run
+- deck
+  - big picture the story behind ..
+  - front end, erb template, scraping, arguments(magical receivers) ... methods are verbs, variables are nouns, arguments are adverbs  -- stephanie
+  - free base, working apis the game works off of that, correct answer class - greg
+  - command line, testing the command line program sucks, production vs test environment. -trevor
+  -
 
+Order of presentation:
+- intros
+- demos
+- guts
+  - greg, trevor, greg, stephanie
+- wrap up stuff: goals, lessons learned, things we could make better
+- questions
 
+---
+
+For presentaton:
+  Lessons Learned
+    - git workflow, communicating, api documentation
+  Goals
+    - fun game that would showcase stuff we learned
+  Things we could make better in the future
+    - testing
+    - architecture
+    - features, be able to do the reverse of the game
+    - let the user set a difficulty level, older, harder movies
+    - make it faster
 
 
