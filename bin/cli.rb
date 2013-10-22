@@ -55,6 +55,11 @@ class CLI
     end
   end
 
+  def play_correct_sound
+    path = Dir.pwd + "/sounds"
+    `afplay #{path}/sound_correct.mp3`
+  end
+
   def start_timer
     self.timer = Timer.new(TIMER)
   end
@@ -85,6 +90,7 @@ class CLI
   end
 
   def correct
+    play_correct_sound
     line
     puts "CORRECT!"
     line
