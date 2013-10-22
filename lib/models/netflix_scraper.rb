@@ -1,3 +1,5 @@
+require_relative '../../config/environment'
+
 class NetflixScraper
   attr_accessor :scraped_data
 

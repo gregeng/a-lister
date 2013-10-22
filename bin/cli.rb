@@ -3,7 +3,7 @@ require_relative '../lib/models/timer'
 
 class CLI
   attr_accessor :game, :api, :actor, :movie, :timer, :mode
-  TIMER = 15
+  TIMER = 10
 
   def initialize
     @on = true
@@ -115,22 +115,18 @@ class CLI
   end
 
   def add_correct_answer_object
-    # netflix_id = self.api.get_netflix_id(self.movie)
-    # actor_picture = RottenTomatoesScraper.new(self.actor).get_image
-    # netflix_url = "http://movies.netflix.com/Movie/"+self.api.get_netflix_id(self.movie)
-    # box_cover = NetflixScraper.new(netflix_url).get_image
-
-    # binding.pry
+    netflix_id = self.api.get_netflix_id(self.movie)
+    actor_picture = RottenTomatoesScraper.new(self.actor).get_image.to_s
+    netflix_url = "http://movies.netflix.com/Movie/"+self.api.get_netflix_id(self.movie)
+    box_cover = NetflixScraper.new(netflix_url).get_image.to_s
 
     CorrectAnswer.new.tap do |x|
       x.name = self.actor;
       x.movie = self.movie;
-      # x.netflix_id = netflix_id;
-      # x.headshot = actor_picture;
-      # x.movie_photo = box_cover
+      x.netflix_id = netflix_id;
+      x.headshot = actor_picture;
+      x.movie_photo = box_cover
     end
-
-
   end
 
   def get_input
@@ -150,6 +146,7 @@ class CLI
   def end_game
     puts "Time's up!\n You got #{self.game.score} answers right"
     puts "Generating results...\n"
+    binding.pry
     sleep 2
     SiteGenerator.generate
     exit
