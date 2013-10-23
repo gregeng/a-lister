@@ -3,13 +3,13 @@ require_relative '../lib/models/timer'
 
 class CLI
   attr_accessor :game, :api, :actor, :movie, :timer, :mode
-  TIMER = 1
+  TIMER = 30
 
   def initialize
     @on = true
     @game = Game.new
     @api = API.new
-    @mode = "test"
+    @mode = "production"
     start_game
   end
 
@@ -145,14 +145,14 @@ class CLI
     puts "Generating results...\n"
 
     CorrectAnswer.all.each do |ca|
-      ca.netflix_id = self.api.get_netflix_id(self.movie)
-      netflix_url = "http://movies.netflix.com/Movie/"+self.api.get_netflix_id(self.movie)
+      ca.netflix_id = self.api.get_netflix_id(ca.movie)
+      netflix_url = "http://movies.netflix.com/Movie/"+self.api.get_netflix_id(ca.movie)
       ca.headshot = RottenTomatoesScraper.new(ca.name).get_image.to_s
       ca.movie_photo = NetflixScraper.new(netflix_url).get_image.to_s
     end
 
-    path = Dir.pwd + "/sounds"
-    `afplay -t 5 #{path}/ipanema.mp3`
+    # path = Dir.pwd + "/sounds"
+    # `afplay -t 5 #{path}/ipanema.mp3`
     SiteGenerator.generate
     exit
   end
