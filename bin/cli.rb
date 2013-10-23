@@ -3,7 +3,7 @@ require_relative '../lib/models/timer'
 
 class CLI
   attr_accessor :game, :api, :actor, :movie, :timer, :mode
-  TIMER = 15
+  TIMER = 1
 
   def initialize
     @on = true
@@ -84,7 +84,6 @@ class CLI
 
   def next_movie
     self.movie = self.api.get_movie(self.actor)
-
     start_timer
     ask_question
   end
@@ -96,7 +95,6 @@ class CLI
     line
     self.game.increase_score
     add_correct_answer_object
-
     if time_left?
       next_movie
     else
@@ -121,17 +119,10 @@ class CLI
   end
 
   def add_correct_answer_object
-    netflix_id = self.api.get_netflix_id(self.movie)
-    actor_picture = RottenTomatoesScraper.new(self.actor).get_image.to_s
-    netflix_url = "http://movies.netflix.com/Movie/"+self.api.get_netflix_id(self.movie)
-    box_cover = NetflixScraper.new(netflix_url).get_image.to_s
 
     CorrectAnswer.new.tap do |x|
       x.name = self.actor;
       x.movie = self.movie;
-      x.netflix_id = netflix_id;
-      x.headshot = actor_picture;
-      x.movie_photo = box_cover
     end
   end
 
@@ -152,7 +143,16 @@ class CLI
   def end_game
     puts "Time's up!\n You got #{self.game.score} answers right"
     puts "Generating results...\n"
-    sleep 2
+
+    CorrectAnswer.all.each do |ca|
+      ca.netflix_id = self.api.get_netflix_id(self.movie)
+      netflix_url = "http://movies.netflix.com/Movie/"+self.api.get_netflix_id(self.movie)
+      ca.headshot = RottenTomatoesScraper.new(ca.name).get_image.to_s
+      ca.movie_photo = NetflixScraper.new(netflix_url).get_image.to_s
+    end
+
+    path = Dir.pwd + "/sounds"
+    `afplay -t 5 #{path}/ipanema.mp3`
     SiteGenerator.generate
     exit
   end
