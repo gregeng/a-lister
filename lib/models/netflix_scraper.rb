@@ -4,7 +4,11 @@ class NetflixScraper
   attr_accessor :scraped_data
 
   def initialize(url)
-    @scraped_data = Nokogiri::HTML(open(url))
+    begin
+      @scraped_data = Nokogiri::HTML(open(url))
+    rescue
+      "unrecognized movie"
+    end
   end
 
   def get_image
