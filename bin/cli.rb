@@ -3,7 +3,7 @@ require_relative '../lib/models/timer'
 
 class CLI
   attr_accessor :game, :api, :actor, :movie, :timer, :mode
-  TIMER = 30
+  TIMER = 15
 
   def initialize
     @on = true
@@ -146,9 +146,9 @@ class CLI
 
     CorrectAnswer.all.each do |ca|
       ca.netflix_id = self.api.get_netflix_id(ca.movie)
-      netflix_url = "http://movies.netflix.com/Movie/"+self.api.get_netflix_id(ca.movie)
-      ca.headshot = RottenTomatoesScraper.new(ca.name).get_image.to_s
-      ca.movie_photo = NetflixScraper.new(netflix_url).get_image.to_s
+      netflix_url = "http://movies.netflix.com/Movie/"+self.api.get_netflix_id(ca.movie) if true
+      ca.headshot = RottenTomatoesScraper.new(ca.name).get_image
+      ca.movie_photo = NetflixScraper.new(netflix_url).get_image
     end
 
     # path = Dir.pwd + "/sounds"
